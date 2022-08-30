@@ -1,0 +1,326 @@
+* {
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
+
+#dark {
+  display: none;
+}
+
+#dark:not(:checked)~.dark {
+  display: none;
+}
+
+#dark:not(:checked)~.wrapper {
+  --l: 15%;
+}
+
+#dark:checked~.light {
+  display: none;
+}
+
+#dark:checked~.wrapper {
+  --l: 75%;
+}
+
+
+.zoom-in {
+  position: absolute;
+  top: 3;
+  left: 10px;
+  width: 30px;
+  height: 30px;
+  color: rgb(255, 255, 255);
+  background-color: hsl(240deg, 20%, calc(var(--l)));
+  border-radius: 10%;
+  border: 1px solid #ccc;
+  box-shadow: 0 0 5px rgb(44, 44, 44);
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.zoom-in:hover {
+  background: rgb(156, 156, 156);
+  box-shadow: 0 0 5px rgb(53, 53, 53);
+}
+
+.zoom-out {
+  position: absolute;
+  top: 3;
+  left: 50px;
+  width: 30px;
+  height: 30px;
+  color: rgb(255, 255, 255);
+  background-color: hsl(240deg, 20%, calc(var(--l)));
+  border-radius: 10%;
+  border: 1px solid #ccc;
+  box-shadow: 0 0 5px rgb(44, 44, 44);
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.zoom-out:hover {
+  background: rgb(156, 156, 156);
+  box-shadow: 0 0 5px rgb(53, 53, 53);
+}
+
+.reset {
+  position: absolute;
+  top: 3;
+  left: 90px;
+  width: 70px;
+  height: 30px;
+  color: rgb(255, 255, 255);
+  background-color: hsl(240deg, 20%, calc(var(--l)));
+  border-radius: 10%;
+  border: 1px solid #ccc;
+  box-shadow: 0 0 5px rgb(44, 44, 44);
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.reset:hover {
+  background: rgb(156, 156, 156);
+  box-shadow: 0 0 5px rgb(53, 53, 53);
+}
+
+label {
+  user-select: none;
+  cursor: pointer;
+  font-size: 32px;
+  position: fixed;
+  top: 4px;
+  right: 4px;
+}
+
+.wrapper {
+  background-color: hsl(240deg, 20%, calc(var(--l) - 10%));
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: -1;
+}
+
+.keyboard {
+  --size: min(80vh, 80vw);
+  --btn-height: calc(var(--size) * 0.025);
+  display: flex;
+  gap: 2em;
+  font-size: calc(var(--size) * 0.0175);
+  background-color: hsl(240deg, 50%, calc(var(--l)));
+  padding: 1em;
+  position: relative;
+  transform-style: preserve-3d;
+  transform: perspective(800px) rotateX(40deg) rotateY(0deg) rotateZ(0deg);
+  animation: color-shift 30s infinite linear;
+  transition: 100ms ease-out;
+}
+
+.keyboard:before,
+.keyboard:after {
+  content: "";
+  position: absolute;
+  transition: 100ms ease-out;
+}
+
+.keyboard:before {
+  width: 100%;
+  height: calc(var(--btn-height) * 1.5);
+  top: 100%;
+  left: 0;
+  background-color: hsl(240deg, 20%, calc(var(--l) - 5%));
+  transform-origin: top center;
+  transform: rotateX(-90deg);
+}
+
+.keyboard:after {
+  width: calc(var(--btn-height) * 1.5);
+  height: 100%;
+  top: 0;
+  left: 0%;
+  background-color: hsl(240deg, 20%, calc(var(--l) + 5%));
+  transform-origin: center left;
+  transform: rotateY(90deg);
+}
+
+.keyboard * {
+  transform-style: preserve-3d;
+}
+
+.keyboard .small p {
+  font-size: 0.75em;
+}
+
+.keyboard p {
+  margin: 0;
+  color: var(--color);
+  font-weight: bold;
+  height: calc(var(--size) * 0.05);
+  min-width: calc(var(--size) * 0.045);
+  text-align: center;
+  padding: 0.25em;
+  background-color: hsl(240deg, 20%, calc(var(--l) + 5%));
+  position: relative;
+  transform: translateZ(var(--btn-height));
+  transition: 100ms ease-out;
+  flex-grow: 1;
+  text-shadow: 0 0 0.125em var(--color);
+}
+
+.keyboard p:hover {
+  color: rgb(255, 255, 255);
+  transform: translateZ(calc(var(--btn-height) * 0.5));
+  text-shadow: 0 0 0.25em var(--color);
+  cursor: default;
+}
+
+.keyboard p:before,
+.keyboard p:after {
+  content: "";
+  position: absolute;
+  transition: 200ms ease-out;
+}
+
+/* top side  */
+.keyboard p:before {
+  height: var(--btn-height);
+  width: 100%;
+  top: 100%;
+  left: 0;
+  background-color: hsl(240deg, 20%, calc(var(--l)));
+  transform-origin: top center;
+  transform: rotateX(-90deg);
+}
+
+/* bottom side  */
+.keyboard p:after {
+  height: var(--btn-height);
+  width: 100%;
+  top: 0%;
+  left: 0;
+  background-color: hsl(240deg, 20%, calc(var(--l)));
+  transform-origin: center left;
+  transform: rotateY(90deg);
+}
+
+.keyboard p:after {
+  height: 100%;
+  width: var(--btn-height);
+  top: 0;
+  left: 0%;
+  background-color: hsl(240deg, 100%, calc(var(--l) + 10%));
+  transform-origin: center left;
+  transform: rotateY(90deg);
+}
+
+.keyboard .left {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5em;
+}
+
+.keyboard .left .top {
+  display: flex;
+  gap: 3em;
+}
+
+.keyboard .left .top .fn-keys {
+  display: flex;
+  gap: 1em;
+}
+
+.keyboard .left .top .group {
+  display: flex;
+  gap: 0.25em;
+}
+
+.keyboard .left .main {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75em;
+}
+
+.keyboard .left .main .row {
+  display: flex;
+  gap: 0.25em;
+}
+
+.keyboard .right {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.keyboard .right .group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75em;
+}
+
+.keyboard .right .row {
+  display: flex;
+  gap: 0.25em;
+}
+
+.keyboard .right .top {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5em;
+}
+
+.keyboard .right .arrows {
+  display: flex;
+  gap: 0.75em 0.25em;
+}
+
+.keyboard .right .arrows .group {
+  gap: 0;
+}
+
+.keyboard .glow {
+  background-color: var(--color);
+  padding: 0.25em;
+}
+
+/* @keyframes color-shift {
+  0% {
+    --color: hsl(0deg, 100%, 50%);
+    transform: perspective(1800px) rotateX(30deg) rotateZ(40deg);
+  }
+
+  12.5% {
+    --color: hsl(45deg, 100%, 50%);
+  }
+
+  25% {
+    --color: hsl(90deg, 100%, 50%);
+  }
+
+  37.5% {
+    --color: hsl(135deg, 100%, 50%);
+  }
+
+  50% {
+    --color: hsl(180deg, 100%, 50%);
+    transform: perspective(1800px) rotateX(60deg) rotateZ(80deg);
+  }
+
+  62.5% {
+    --color: hsl(225deg, 100%, 50%);
+  }
+
+  75% {
+    --color: hsl(270deg, 100%, 50%);
+  }
+
+  87.5% {
+    --color: hsl(315deg, 100%, 50%);
+  }
+
+  100% {
+    --color: hsl(360deg, 100%, 50%);
+    transform: perspective(1800px) rotateX(30deg) rotateZ(40deg);
+  }
+} */

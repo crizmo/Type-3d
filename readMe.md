@@ -1,6 +1,10 @@
 # Type 3D
 A simple 3D keyboard made using css and html.
-Link - [https://Type-3D.kurizu.repl.co](https://Type-3D.kurizu.repl.co)
+
+# Links
+Site - [https://Type-3D.kurizu.repl.co](https://Type-3D.kurizu.repl.co) <br>
+Github - [https://github.com/crizmo/Type-3d](https://github.com/crizmo/Type-3d)
+
 
 # ToDo
 - Add Type Testing 

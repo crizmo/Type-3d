@@ -1,5 +1,5 @@
 function keyPressed(e) {
-    // console.log(e.key);
+    console.log(e.key);
     if(e.key === e.key.toUpperCase()) {
         document.getElementById(e.key.toLowerCase()).style.transform = "translateZ(2px)";
         document.getElementById(e.key.toLowerCase()).style.color = "white";
@@ -13,9 +13,22 @@ function keyPressed(e) {
         document.getElementById(e.key).style.transform = "translateZ(2px)";
         document.getElementById(e.key).style.color = "white";
 
+        if(e.key === "Shift") {
+            console.log("alt");
+            document.getElementById("shift-left").style.transform = "translateZ(2px)";
+            document.getElementById("shift-left").style.color = "white";
+        }
+
         setTimeout(function() {
             document.getElementById(e.key).style.transform = "";
             document.getElementById(e.key).style.color = "";
+
+            if(e.key === "Shift") {
+                console.log("alt");
+                document.getElementById("shift-left").style.transform = "";
+                document.getElementById("shift-left").style.color = "";
+            }
+            
         }, 75);
     }
 }

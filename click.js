@@ -14,7 +14,6 @@ function keyPressed(e) {
         document.getElementById(e.key).style.color = "white";
 
         if(e.key === "Shift") {
-            console.log("alt");
             document.getElementById("shift-left").style.transform = "translateZ(2px)";
             document.getElementById("shift-left").style.color = "white";
         }
@@ -24,11 +23,10 @@ function keyPressed(e) {
             document.getElementById(e.key).style.color = "";
 
             if(e.key === "Shift") {
-                console.log("alt");
                 document.getElementById("shift-left").style.transform = "";
                 document.getElementById("shift-left").style.color = "";
             }
-            
+
         }, 75);
     }
 }
